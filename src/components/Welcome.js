@@ -1,7 +1,19 @@
-import React from 'react';
-import welcomeImagesData from './data/welcome_images.json';
+import React, {useState, useEffect} from 'react';
+//import welcomeImagesData from './data/welcome_images.json';
 
 const Welcome = () => {
+  const [welcomeImagesData, setWelcomeImagesData] = useState([]);
+
+  useEffect(() => {
+    loadWelcomeImagesData();
+  }, []);
+
+  const loadWelcomeImagesData = async() => {
+    const resp = await fetch('https://prf4yi3o58.execute-api.us-east-1.amazonaws.com/Production/WelcomePages');
+    let jsonData = await resp.json();
+
+    setWelcomeImagesData(jsonData);
+  };
     return(
           <div className="scene" id="welcome">
             <article className="content">
